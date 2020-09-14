@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-import Game from '../helpers/Game';
+import Board from '../helpers/Board';
 import Row from './Row';
 import './PlayArea.scss';
 
+const nextColor = (currentColor) => {
+  return currentColor === 'red' ? 'blue' : 'red';
+};
+
 const PlayArea = () => {
-  const [game, setGame] = useState(new Game());
-  const [currentColor, setCurrentColor] = useState('red');
+  const [game, setGame] = useState({
+    board: new Board(7, 6),
+    currentColor: 'red'
+  });
 
   const cellClickHandler = (cell) => {
     if (!cell.content) {
       setGame(prevGame => {
         const newGame = {...prevGame};
-        newGame.board.board[cell.y][cell.x].content = currentColor;
+        newGame.board.board[cell.y][cell.x].content = newGame.currentColor;
+        newGame.currentColor = nextColor(newGame.currentColor);
         return newGame;
       });
-      
-      swapColor();
     }
-  };
-
-  const swapColor = () => {
-    const nextColor = currentColor === 'red' ? 'blue' : 'red';
-    setCurrentColor(nextColor);
   };
 
   return (
