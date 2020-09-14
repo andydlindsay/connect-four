@@ -4,12 +4,19 @@ import Row from './Row';
 import './PlayArea.scss';
 
 const PlayArea = () => {
-  const [game] = useState(new Game());
+  const [game, setGame] = useState(new Game());
   const [currentColor, setCurrentColor] = useState('red');
 
   const cellClickHandler = (cell) => {
-    game.board.board[cell.y][cell.x].content = currentColor;
-    swapColor();
+    if (!cell.content) {
+      setGame(prevGame => {
+        const newGame = {...prevGame};
+        newGame.board.board[cell.y][cell.x].content = currentColor;
+        return newGame;
+      });
+      
+      swapColor();
+    }
   };
 
   const swapColor = () => {

@@ -12,3 +12,10 @@
 .blue {
   background-color: blue;
 }
+
+@media screen and (max-width: 600px) {
+  .cell {
+    width: 80px;
+    height: 80px;
+  }
+}
