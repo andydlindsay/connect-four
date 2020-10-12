@@ -1,11 +1,16 @@
 import React from 'react';
 import './Cell.scss';
 
-const Cell = ({cell, cellClickHandler: clickHandler}) => {
+const Cell = ({cell, cellClickHandler}) => {
   const className = `cell ${cell.content ? cell.content : ''}`;
 
+  const clickHandler = (event) => {
+    event.stopPropagation();
+    cellClickHandler(cell);
+  }
+
   return (
-    <div className={className} onClick={() => clickHandler(cell)}></div>
+    <div className={className} onClick={(e) => clickHandler(e)}></div>
   )
 };
 

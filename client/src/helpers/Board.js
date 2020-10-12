@@ -17,4 +17,66 @@ export default class {
     }
     return this;
   }
+
+  placeLowest(color, x) {
+    for (let y = this.board.length - 1; y >= 0; y--) {
+      if (!this.board[y][x].content) {
+        return this.board[y][x].content = color;
+      }
+    }
+  }
+
+  checkForWin() {
+    // check horizontal
+    for (const row of this.board) {
+      let inARow = 0;
+      let currentColor;
+      for (const cell of row) {
+        if (cell.content) {
+          if (cell.content === currentColor) {
+            inARow++;
+          } else {
+            currentColor = cell.content;
+            inARow = 1;
+          }
+        } else {
+          inARow = 0;
+        }
+        if (inARow === 4) {
+          return true;
+        }
+      }
+    }
+
+    // check vertical
+    for (let x = 0; x < this.width; x++) {
+      let inARow = 0;
+      let currentColor;
+      for (let y = 0; y < this.height; y++) {
+        const cell = this.board[y][x];
+        if (cell.content) {
+          if (cell.content === currentColor) {
+            inARow++;
+          } else {
+            currentColor = cell.content;
+            inARow = 1;
+          }
+        } else {
+          inARow = 0;
+        }
+        if (inARow === 4) {
+          return true;
+        }
+      }
+    }
+
+    // check diagonal
+    for (let k = 0; k < this.width + this.height; k++) {
+      for (let y = this.height - 1; y >= 0; y--) {
+        console.log(y);
+      }
+    }
+
+    return false;
+  }
 };
