@@ -70,10 +70,52 @@ export default class {
       }
     }
 
-    // check diagonal
+    // check diagonals
     for (let k = 0; k < this.width + this.height; k++) {
+      let inARow = 0;
+      let currentColor;
       for (let y = this.height - 1; y >= 0; y--) {
-        console.log(y);
+        const x = k - y;
+        if (x >= 0 && x < this.width) {
+          const cell = this.board[y][x];
+          if (cell.content) {
+            if (cell.content === currentColor) {
+              inARow++;
+            } else {
+              currentColor = cell.content;
+              inARow = 1;
+            }
+          } else {
+            inARow = 0;
+          }
+          if (inARow === 4) {
+            return true;
+          }
+        }
+      }
+    }
+
+    for (let k = 0; k < this.width + this.height; k++) {
+      let inARow = 0;
+      let currentColor;
+      for (let y = this.height - 1; y >= 0; y--) {
+        const x = k - (this.height - y);
+        if (x >= 0 && x < this.width) {
+          const cell = this.board[y][x];
+          if (cell.content) {
+            if (cell.content === currentColor) {
+              inARow++;
+            } else {
+              currentColor = cell.content;
+              inARow = 1;
+            }
+          } else {
+            inARow = 0;
+          }
+          if (inARow === 4) {
+            return true;
+          }
+        }
       }
     }
 
