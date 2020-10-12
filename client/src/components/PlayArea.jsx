@@ -26,6 +26,16 @@ const PlayArea = () => {
     }
   };
 
+  const resetGame = () => {
+    setGame(prevGame => {
+      const newGame = {...prevGame};
+      newGame.board.reset();
+      newGame.currentColor = 'red';
+      newGame.gameOver = false;
+      return newGame;
+    });
+  };
+
   return (
     <div className="parent">
       <div className="play-area">
@@ -34,6 +44,7 @@ const PlayArea = () => {
       <div className="data-display">
         <h2>Color: {game.currentColor}</h2>
         { game.gameOver && <h2>Game Over! {nextColor(game.currentColor)} wins!</h2> }
+        <button onClick={resetGame}>Start New Game</button>
       </div>
     </div>
   )

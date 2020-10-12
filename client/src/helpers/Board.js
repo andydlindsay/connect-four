@@ -123,4 +123,8 @@ export default class {
 
     return false;
   }
+
+  reset() {
+    this.genBoard();
+  }
 };
