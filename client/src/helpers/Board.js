@@ -27,6 +27,8 @@ export default class {
   }
 
   checkForWin() {
+    const amountToWin = 4;
+
     // check horizontal
     for (const row of this.board) {
       let inARow = 0;
@@ -42,7 +44,7 @@ export default class {
         } else {
           inARow = 0;
         }
-        if (inARow === 4) {
+        if (inARow === amountToWin) {
           return true;
         }
       }
@@ -64,7 +66,7 @@ export default class {
         } else {
           inARow = 0;
         }
-        if (inARow === 4) {
+        if (inARow === amountToWin) {
           return true;
         }
       }
@@ -88,7 +90,7 @@ export default class {
           } else {
             inARow = 0;
           }
-          if (inARow === 4) {
+          if (inARow === amountToWin) {
             return true;
           }
         }
@@ -112,7 +114,7 @@ export default class {
           } else {
             inARow = 0;
           }
-          if (inARow === 4) {
+          if (inARow === amountToWin) {
             return true;
           }
         }
