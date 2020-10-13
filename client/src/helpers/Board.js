@@ -5,10 +5,10 @@ export default class {
     this.width = width;
     this.height = height;
     this.board = [];
-    this.genBoard();
+    this.reset();
   }
 
-  genBoard() {
+  reset() {
     for (let y = 0; y < this.height; y++) {
       this.board[y] = [];
       for (let x = 0; x < this.width; x++) {
@@ -122,9 +122,5 @@ export default class {
     }
 
     return false;
-  }
-
-  reset() {
-    this.genBoard();
   }
 };
