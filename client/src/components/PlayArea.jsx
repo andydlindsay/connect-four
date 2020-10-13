@@ -48,7 +48,7 @@ const PlayArea = () => {
           />)) }
       </div>
       <div className="data-display">
-        <h2>It's {game.currentColor}'s turn!</h2>
+        { !game.gameOver && <h2>It's {game.currentColor}'s turn!</h2> }
         { game.gameOver && <h2>Game Over! {nextColor(game.currentColor)} wins!</h2> }
         <button onClick={resetGame}>Start New Game</button>
       </div>
