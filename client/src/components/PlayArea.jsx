@@ -53,7 +53,7 @@ const PlayArea = () => {
         <button onClick={resetGame}>Start New Game</button>
       </div>
     </div>
-  )
+  );
 };
 
 export default PlayArea;
