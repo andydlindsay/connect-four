@@ -1,12 +1,12 @@
 {
   "name": "connect-four",
   "version": "1.0.0",
-  "description": "",
+  "description": "a basic connect four game",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "cd client/ && npm install && npm run build"
+    "build": "cd client/ && yarn install && yarn build"
   },
   "keywords": ["game", "connect four", "fun"],
   "author": "Andy Lindsay",
