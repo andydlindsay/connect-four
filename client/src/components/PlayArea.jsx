@@ -18,7 +18,7 @@ const PlayArea = () => {
   const cellClickHandler = (cell) => {
     if (!cell.content && !game.gameOver) {
       setGame(prevGame => {
-        const newGame = {...prevGame, board: cloneDeep(prevGame.board)};
+        const newGame = cloneDeep(prevGame);
         newGame.board.placeLowest(newGame.currentColor, cell.x);
         newGame.currentColor = nextColor(newGame.currentColor);
         newGame.gameOver = newGame.board.checkForWin();
@@ -29,7 +29,7 @@ const PlayArea = () => {
 
   const resetGame = () => {
     setGame(prevGame => {
-      const newGame = {...prevGame, board: cloneDeep(prevGame.board)};
+      const newGame = cloneDeep(prevGame);
       newGame.board.reset();
       newGame.currentColor = 'red';
       newGame.gameOver = false;
