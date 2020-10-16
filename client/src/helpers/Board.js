@@ -123,4 +123,13 @@ export default class {
 
     return false;
   }
+
+  chooseCompMove(difficulty) {
+    switch (difficulty) {
+      case 'easy':
+        return Math.floor(Math.random() * this.width);
+      default:
+        return 1;
+    }
+  }
 };

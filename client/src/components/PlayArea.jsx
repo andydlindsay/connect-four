@@ -12,19 +12,48 @@ const PlayArea = () => {
   const [game, setGame] = useState({
     board: new Board(7, 6),
     currentColor: 'red',
-    gameOver: false
+    gameOver: false,
+    gameType: 'local',
+    difficulty: 'easy'
   });
 
   const cellClickHandler = (cell) => {
     if (!cell.content && !game.gameOver) {
-      setGame(prevGame => {
-        const newGame = cloneDeep(prevGame);
-        newGame.board.placeLowest(newGame.currentColor, cell.x);
-        newGame.currentColor = nextColor(newGame.currentColor);
-        newGame.gameOver = newGame.board.checkForWin();
-        return newGame;
-      });
+      if (game.gameType === 'local') {
+        setGame(prevGame => {
+          const newGame = cloneDeep(prevGame);
+          newGame.board.placeLowest(newGame.currentColor, cell.x);
+          newGame.currentColor = nextColor(newGame.currentColor);
+          newGame.gameOver = newGame.board.checkForWin();
+          return newGame;
+        });
+      } else {
+        setGame(prevGame => {
+          const newGame = cloneDeep(prevGame);
+          newGame.board.placeLowest(newGame.currentColor, cell.x);
+          newGame.currentColor = nextColor(newGame.currentColor);
+          newGame.gameOver = newGame.board.checkForWin();
+
+          if (!newGame.gameOver) {
+            const compX = newGame.board.chooseCompMove(newGame.difficulty);
+            newGame.board.placeLowest(newGame.currentColor, compX);
+            newGame.currentColor = nextColor(newGame.currentColor);
+            newGame.gameOver = newGame.board.checkForWin();
+          }
+          
+          return newGame;
+        });
+      } 
     }
+  };
+
+  const setGameType = (gameType) => {
+    resetGame();
+    setGame(prevGame => {
+      const newGame = cloneDeep(prevGame);
+      newGame.gameType = gameType;
+      return newGame;
+    });
   };
 
   const resetGame = () => {
@@ -51,6 +80,11 @@ const PlayArea = () => {
         { !game.gameOver && <h2>It's {game.currentColor}'s turn!</h2> }
         { game.gameOver && <h2>Game Over! {nextColor(game.currentColor)} wins!</h2> }
         <button onClick={resetGame}>Start New Game</button>
+
+        <div>
+          <button onClick={() => setGameType('local')}>Local Multi-player</button>
+          <button onClick={() => setGameType('ai')}>Versus AI</button>
+        </div>
       </div>
     </div>
   );
